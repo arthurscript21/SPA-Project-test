@@ -1,0 +1,34 @@
+#comando para dar nombre
+name: CI Pipeline
+
+#indica cuando se ejecuta el flujo
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+
+
+#acciones que se ejutaran en el servidor
+jobs:
+  frontend-build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout repository (git clone)
+        uses: actions/checkout@v4
+
+      - name: Setup node (instalalr node)
+        uses: actions/setup-node@v4
+        with: 
+          node-version: '20'
+
+      - name: Instalar dependencia
+        run: npm install
+
+      - name: Contruccion
+        run: npm run build 
